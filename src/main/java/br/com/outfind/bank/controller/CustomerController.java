@@ -1,5 +1,6 @@
 package br.com.outfind.bank.controller;
 
+import br.com.outfind.bank.entity.Customer;
 import br.com.outfind.bank.service.CustomerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ public class CustomerController {
     }
 
     @GetMapping("/customers")
-    public String listCustomers() {
-        return customerService.listCustomers();
+    public Customer getCustomer() {
+        return customerService.getCustomer();
     }
 }
