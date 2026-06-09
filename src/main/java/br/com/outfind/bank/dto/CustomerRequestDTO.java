@@ -1,27 +1,11 @@
-package br.com.outfind.bank.entity;
+package br.com.outfind.bank.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "customers")
-public class Customer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class CustomerRequestDTO {
 
     private String fullName;
     private String cpf;
     private String email;
     private String phone;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFullName() {
         return fullName;
