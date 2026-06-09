@@ -1,23 +1,29 @@
 package br.com.outfind.bank.controller;
 
-import br.com.outfind.bank.entity.Customer;
+import br.com.outfind.bank.dto.CustomerRequestDTO;
+import br.com.outfind.bank.dto.CustomerResponseDTO;
 import br.com.outfind.bank.service.CustomerService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/customers")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    private final CustomerService service;
 
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
+    public CustomerController(CustomerService service) {
+        this.service = service;
     }
 
-    @GetMapping("/customers")
-    public List<Customer> getCustomers() {
-        return customerService.getCustomers();
+    @GetMapping
+    public List<CustomerResponseDTO> getCustomers() {
+        return service.getCustomers();
+    }
+
+    @PostMapping
+    public CustomerResponseDTO createCustomer(@RequestBody CustomerRequestDTO dto) {
+        return service.createCustomer(dto);
     }
 }
