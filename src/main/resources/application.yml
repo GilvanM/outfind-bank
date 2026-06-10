@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: outfind-bank
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/outfind_bank
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 9090
