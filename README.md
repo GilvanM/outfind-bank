@@ -1,29 +1,32 @@
-# OUTFIND Bank
+# Outfind Bank
 
-## Overview
+## About the Project
 
-OUTFIND Bank is a backend application built with Java and Spring Boot.
-
-The project was created as a learning and portfolio project inspired by real banking systems, focusing on backend development, software architecture, REST APIs, version control, containers, and database integration.
+Outfind Bank is a backend banking system developed for learning and portfolio purposes. The project is being built using Java and Spring Boot, following industry-standard practices such as layered architecture, Git workflow, code reviews, and database integration.
 
 ## Tech Stack
 
 * Java 21
 * Spring Boot
+* Spring Web
+* Spring Data JPA
+* PostgreSQL
 * Maven
-* Git
-* GitHub
-* PostgreSQL (planned)
-* Docker (planned)
+* Git & GitHub
 
 ## Project Structure
 
-* controller: REST endpoints
-* service: business logic
-* repository: data access layer
-* entity: domain models
-* dto: data transfer objects
-* config: application configuration
+```text
+br.com.outfind.bank
+│
+├── controller
+├── service
+├── repository
+├── entity
+├── dto
+├── config
+└── OutfindBankApplication
+```
 
 ## Running Locally
 
@@ -31,37 +34,60 @@ The project was created as a learning and portfolio project inspired by real ban
 
 * Java 21
 * Maven
-* Git
+* PostgreSQL 18
 
-### Run the Application
+### Database
 
+Create a PostgreSQL database:
+
+```sql
+CREATE DATABASE outfind_bank;
+```
+
+Update the datasource credentials in:
+
+```text
+src/main/resources/application.yml
+```
+
+### Start the Application
+
+```bash
 mvn spring-boot:run
+```
 
-The application will start on:
-
-http://localhost:8080
+Or run the `OutfindBankApplication` class from IntelliJ IDEA.
 
 ## Available Endpoints
 
 ### Health Check
 
+```http
 GET /health
+```
 
 ### Customers
 
+```http
 GET /customers
+```
 
-## Current Features
+## Development Workflow
 
-* Health endpoint
-* Customer module
-* Layered architecture
-* JSON responses
+The project follows a Git workflow based on:
 
-## Future Improvements
+* Feature Branches
+* Pull Requests
+* Code Reviews
+* Merge into Main Branch
 
-* PostgreSQL integration
+## Future Roadmap
+
+* Customer persistence with PostgreSQL
+* DTO implementation
+* Validation
+* Unit Tests
+* Integration Tests
 * Docker support
-* Automated tests
-* Authentication and authorization
-* Banking operations
+* Spring Security
+* Banking operations APIs
