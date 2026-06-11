@@ -77,5 +77,13 @@ public class CustomerService {
         );
     }
 
+    public void deleteCustomer(Long id) {
+
+        Customer customer = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        repository.delete(customer);
+    }
+
     
 }
