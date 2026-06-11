@@ -31,4 +31,12 @@ public class CustomerController {
     public CustomerResponseDTO getCustomerById(@PathVariable Long id) {
         return service.getCustomerById(id);
     }
+
+    @PutMapping("/{id}")
+    public CustomerResponseDTO updateCustomer(
+            @PathVariable Long id,
+            @RequestBody CustomerRequestDTO dto) {
+
+        return service.updateCustomer(id, dto);
+    }
 }
