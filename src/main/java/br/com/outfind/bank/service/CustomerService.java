@@ -58,5 +58,24 @@ public class CustomerService {
         );
     }
 
+    public CustomerResponseDTO updateCustomer(Long id, CustomerRequestDTO dto) {
+
+        Customer customer = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        customer.setFullName(dto.getFullName());
+        customer.setCpf(dto.getCpf());
+        customer.setEmail(dto.getEmail());
+        customer.setPhone(dto.getPhone());
+
+        Customer updated = repository.save(customer);
+
+        return new CustomerResponseDTO(
+                updated.getId(),
+                updated.getFullName(),
+                updated.getEmail()
+        );
+    }
+
     
 }
