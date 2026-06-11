@@ -45,4 +45,18 @@ public class CustomerService {
                 ))
                 .collect(Collectors.toList());
     }
+
+    public CustomerResponseDTO getCustomerById(Long id) {
+
+        Customer customer = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        return new CustomerResponseDTO(
+                customer.getId(),
+                customer.getFullName(),
+                customer.getEmail()
+        );
+    }
+
+    
 }
