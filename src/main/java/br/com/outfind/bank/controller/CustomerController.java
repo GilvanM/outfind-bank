@@ -3,6 +3,7 @@ package br.com.outfind.bank.controller;
 import br.com.outfind.bank.dto.CustomerRequestDTO;
 import br.com.outfind.bank.dto.CustomerResponseDTO;
 import br.com.outfind.bank.service.CustomerService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,9 @@ public class CustomerController {
     }
 
     @PostMapping
-    public CustomerResponseDTO createCustomer(@RequestBody CustomerRequestDTO dto) {
+    public CustomerResponseDTO createCustomer(
+            @Valid @RequestBody CustomerRequestDTO dto) {
+
         return service.createCustomer(dto);
     }
 
@@ -35,7 +38,7 @@ public class CustomerController {
     @PutMapping("/{id}")
     public CustomerResponseDTO updateCustomer(
             @PathVariable Long id,
-            @RequestBody CustomerRequestDTO dto) {
+            @Valid @RequestBody CustomerRequestDTO dto) {
 
         return service.updateCustomer(id, dto);
     }

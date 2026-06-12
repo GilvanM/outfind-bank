@@ -1,10 +1,21 @@
 package br.com.outfind.bank.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class CustomerRequestDTO {
 
+    @NotBlank(message = "Full name is required")
     private String fullName;
+
+    @NotBlank(message = "CPF is required")
     private String cpf;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
     private String email;
+
+    @NotBlank(message = "Phone is required")
     private String phone;
 
     public String getFullName() {
