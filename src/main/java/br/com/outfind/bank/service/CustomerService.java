@@ -3,6 +3,7 @@ package br.com.outfind.bank.service;
 import br.com.outfind.bank.dto.CustomerRequestDTO;
 import br.com.outfind.bank.dto.CustomerResponseDTO;
 import br.com.outfind.bank.entity.Customer;
+import br.com.outfind.bank.exception.CustomerNotFoundException;
 import br.com.outfind.bank.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,7 @@ public class CustomerService {
     }
 
     public List<CustomerResponseDTO> getCustomers() {
+
         return repository.findAll()
                 .stream()
                 .map(c -> new CustomerResponseDTO(
@@ -49,7 +51,11 @@ public class CustomerService {
     public CustomerResponseDTO getCustomerById(Long id) {
 
         Customer customer = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() ->
+                        new CustomerNotFoundException(
+                                "Customer with id " + id + " not found"
+                        )
+                );
 
         return new CustomerResponseDTO(
                 customer.getId(),
@@ -61,7 +67,11 @@ public class CustomerService {
     public CustomerResponseDTO updateCustomer(Long id, CustomerRequestDTO dto) {
 
         Customer customer = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() ->
+                        new CustomerNotFoundException(
+                                "Customer with id " + id + " not found"
+                        )
+                );
 
         customer.setFullName(dto.getFullName());
         customer.setCpf(dto.getCpf());
@@ -80,10 +90,12 @@ public class CustomerService {
     public void deleteCustomer(Long id) {
 
         Customer customer = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() ->
+                        new CustomerNotFoundException(
+                                "Customer with id " + id + " not found"
+                        )
+                );
 
         repository.delete(customer);
     }
-
-    
 }
