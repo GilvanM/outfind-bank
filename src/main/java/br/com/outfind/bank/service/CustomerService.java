@@ -1,5 +1,5 @@
 package br.com.outfind.bank.service;
-
+import br.com.outfind.bank.exception.CustomerCpfAlreadyExistsException;
 import br.com.outfind.bank.dto.CustomerRequestDTO;
 import br.com.outfind.bank.dto.CustomerResponseDTO;
 import br.com.outfind.bank.entity.Customer;
@@ -20,7 +20,9 @@ public class CustomerService {
     }
 
     public CustomerResponseDTO createCustomer(CustomerRequestDTO dto) {
-
+        if (repository.findByCpf(dto.getCpf()).isPresent()) {
+            throw new CustomerCpfAlreadyExistsException();
+        }
         Customer customer = new Customer();
         customer.setFullName(dto.getFullName());
         customer.setCpf(dto.getCpf());
